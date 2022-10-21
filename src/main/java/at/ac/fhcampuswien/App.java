@@ -59,13 +59,13 @@ public class App {
     }
 
     public static int randomNumberBetweenOneAndHundred() {
-        int randomNumber = 1 + (int)(Math.random() * ((100 - 1) + 1));
+        int randomNumber = 1 + (int) (Math.random() * ((100 - 1) + 1));
         return randomNumber;
     }
 
-    public static boolean swapArrays(int [] a, int [] b) {
+    public static boolean swapArrays(int[] a, int[] b) {
         int[] temp = new int[a.length];
-        if (a.length != b.length){
+        if (a.length != b.length) {
             return false;
         }
 
@@ -76,24 +76,73 @@ public class App {
         }
         return true;
     }
-    public static int checkDigit(int [] a){
+
+    public static String camelCase(String s) {
+        char[] satzArray = toCharArray(s);
+        int y = 1; //zähler
+        int i;
+
+        for (i = 0; i < satzArray.length; i++) {
+            if (64 < satzArray[i] && satzArray[i] < 91) {
+                satzArray[i] = (char) (satzArray[i] + 32);
+            }
+        }
+
+        satzArray[0] = (char) (satzArray[0] - 32);
+
+        for (i = 0; i < satzArray.length; i++) {
+            if (32 == satzArray[i]) {
+                satzArray[i + 1] = (char) (satzArray[i + 1] - 32);
+            }
+        }
+
+        for (i = 0; i < satzArray.length; i++) {
+            if (65 > satzArray[i] || satzArray[i] > 122 || (90 < satzArray[i] && satzArray[i] < 97)) {
+                for (int j = i; j < satzArray.length - 1; j++) {
+                    satzArray[j] = (satzArray[j + 1]);
+                }
+                y++;
+            }
+        }
+
+        int newlength = satzArray.length - y / 2;
+        char[] finalArr = new char[newlength];
+
+        for (i = 0; i < newlength; i++) {
+            finalArr[i] = satzArray[i];
+        }
+        String ausgabe = String.valueOf(finalArr);
+        return ausgabe;
+    }
+
+    public static char[] toCharArray(String a) {
+        int stringlenth = a.length();
+        char[] b = new char[stringlenth];
+
+        for (int i = 0; i < stringlenth; i++) {
+            b[i] = a.charAt(i);
+        }
+        return b;
+    }
+
+    public static int checkDigit(int[] a) {
         int[] gewicht = new int[a.length];
         int[] produkt = new int[a.length];
         int sum = 0, modulo = 0, prueffziff = 0;
 
         for (int i = 0; i < a.length; i++) {
-            gewicht[i] = i+2;
+            gewicht[i] = i + 2;
             produkt[i] = a[i] * gewicht[i];
             sum = sum + produkt[i];
         }
         modulo = sum % 11;
         prueffziff = 11 - modulo;
 
-        if (prueffziff==10){
-            prueffziff=0;
+        if (prueffziff == 10) {
+            prueffziff = 0;
         }
-        if (prueffziff==11){
-            prueffziff=5;
+        if (prueffziff == 11) {
+            prueffziff = 5;
         }
         return prueffziff;
 
@@ -106,8 +155,8 @@ public class App {
         // print their results
         // etc.
         //guessingGame(randomNumberBetweenOneAndHundred());
-        int[] array1={1,2,3,4,5};
-        int[] array2={9,8,7,6,0};
-        swapArrays( array1, array2);
+        int[] array1 = {1, 2, 3, 4, 5};
+        int[] array2 = {9, 8, 7, 6, 0};
+        swapArrays(array1, array2);
     }
 }
